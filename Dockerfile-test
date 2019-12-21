@@ -17,7 +17,7 @@ ENV FLASK_DEBUG True
 #ENTRYPOINT ["python", "-m"]
 #CMD ["flask", "run", "--host=0.0.0.0"]
 #OR
-#CMD python -m flask run --host=0.0.0.0
+CMD python -m flask run --host=0.0.0.0
 
 #2. run with python module at file (preferred by me :D)
 #CMD ["python", "index.py"]
