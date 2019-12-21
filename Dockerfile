@@ -1,0 +1,35 @@
+FROM python:3.7
+
+COPY . /app
+
+WORKDIR /app
+
+RUN pip install -r requirements.txt
+
+EXPOSE 5000
+
+#FLASK_ENV=development flask run
+#flask run --extra-files file1:dirA/file2:dirB/
+#export FLASK_RUN_EXTRA_FILES=file1:dirA/file2:dirB/
+
+
+ENTRYPOINT ["python"]
+
+CMD ["app.py"]
+#CMD python run app.py
+#CMD python -m flask run
+
+#ENTRYPOINT ["flask"]
+#CMD ["run"]
+#CMD ["flask", "run", "app.py"]
+
+#
+#
+#
+#https://pythonhosted.org/watchdog/quickstart.html#a-simple-example
+# docker build --tag python/test/flask-pandas .
+# docker run --rm --name my-py-test -p 5000:5000 -v ./:/app python/test/flask-pandas
+
+# docker build --tag python/test/flask-pandas . & docker run -d --rm --name my-py-test -p 5000:5000 python/test/flask-pandas &
+
+# alias p-test='docker build --tag python/test/flask-pandas .; docker run -d --rm --name my-py-test -p 5000:5000 -v $(pwd):/app python/test/flask-pandas; docker logs -f my-py-test;'
