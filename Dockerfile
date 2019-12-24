@@ -1,35 +1,24 @@
-FROM python:3.7
+FROM python:3-alpine
 
 COPY . /app
 
 WORKDIR /app
 
+#RUN pip install flask
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-#FLASK_ENV=development flask run
-#flask run --extra-files file1:dirA/file2:dirB/
-#export FLASK_RUN_EXTRA_FILES=file1:dirA/file2:dirB/
+#1. set env 
+ENV FLASK_APP index
+ENV FLASK_ENV development
+ENV FLASK_RUN_PORT 5000
+ENV FLASK_DEBUG True
 
+#2. run 
+CMD python -m flask run --host=0.0.0.0
 
-ENTRYPOINT ["python"]
+# docker build -t python/phutest1.
+# docker run -d --rm --name my-py-test1 -p 5001:5000 -v $(pwd):/app python/test/flask
+# docker logs -f my-py-test1
 
-CMD ["app.py"]
-#CMD python run app.py
-#CMD python -m flask run
-
-#ENTRYPOINT ["flask"]
-#CMD ["run"]
-#CMD ["flask", "run", "app.py"]
-
-#
-#
-#
-#https://pythonhosted.org/watchdog/quickstart.html#a-simple-example
-# docker build --tag python/test/flask-pandas .
-# docker run --rm --name my-py-test -p 5000:5000 -v ./:/app python/test/flask-pandas
-
-# docker build --tag python/test/flask-pandas . & docker run -d --rm --name my-py-test -p 5000:5000 python/test/flask-pandas &
-
-# alias p-test='docker build --tag python/test/flask-pandas .; docker run -d --rm --name my-py-test -p 5000:5000 -v $(pwd):/app python/test/flask-pandas; docker logs -f my-py-test;'
